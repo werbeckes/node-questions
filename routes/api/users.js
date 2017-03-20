@@ -3,7 +3,7 @@ var models  = require('../../models');
 
 var router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/users', (req, res) => {
   models.User.findAll({
     attributes: ['username','id']
   }).then( (users) => {
@@ -11,10 +11,12 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/users', (req, res) => {
   models.User.create({
     username: req.body.username
-  }).then( () => { res.send('created') });
+  }).then( () => {
+    res.sendStatus(201);
+  });
 });
 
 module.exports = router;
